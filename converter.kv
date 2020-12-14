@@ -1,0 +1,88 @@
+#:kivy 2.0.0
+<UnitConverter>:
+	name: "unitconverter"
+
+	BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+		
+		GridLayout:
+			size_hint: (1, .1)
+			cols: 2
+
+			Button:
+				font_size: 32
+				text: "Scientific cal"
+				on_press:
+					root.manager.current = "scientificcalculator"
+
+			Button:
+				font_size: 32
+				text: "Normal cal"
+				on_press:
+					root.manager.current = "normalcalculator"
+
+		GridLayout:
+			cols: 3
+
+			# row 1
+			Button:
+				text: "Weight"
+				on_press:
+					root.manager.current = "converters"
+
+			Button:
+				text: "Temperature"
+
+			Button:
+				text: "Energy"
+
+			# row 2
+			Button:
+				text: "Area"
+
+			Button:
+				text: "Speed"
+
+			Button:
+				text: "Time"
+
+			# row 3
+			Button:
+				text: "Power"
+
+			Button:
+				text: "Data"
+
+			Button:
+				text: "Length"
+
+<Converters>:
+	name: "converters"
+	BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+		Button:
+			size_hint: (.9, .05)
+			text: "<<"
+			on_press:
+				root.manager.current = "unitconverter"
+			
+		TextInput:
+			id: converter_input
+			text: ""
+			size_hint: (1, .17)
+
+		GridLayout:
+			cols: 3
+			Button:
+				id: converter_btn1
+				text: ""
+
+			Button:
+				id: converter_btn2
+				text: ""
+
+			Button:
+				id: converter_btn3
+				text: ""
