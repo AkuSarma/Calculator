@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
+import calculations
 
 Window.size = (500, 600)
 
@@ -77,14 +78,25 @@ class NormalCalculator(Screen):
 
 
 class ScientificCalculator(Screen):
+	scientificSign = None # To check if there is any scientific sign used
+	signUsed = None # Keep the record of the sign used
+	mathSignUsed = None
+
 	def clear(self):
 		NormalCalculator.clear(self)
+		self.signUsed = None
+		self.scientificSign = None
+		self.mathSignUsed = None
 
 	def button_press(self, button):
 		NormalCalculator.button_press(self, button)
 
 	def math_sign(self, sign):
-		NormalCalculator.math_sign(self, sign)
+		if self.mathSignUsed:
+			self.equals()
+		else:
+			NormalCalculator.math_sign(self, sign)
+			self.mathSignUsed = sign
 
 	def percent(self):
 		NormalCalculator.percent(self)
@@ -98,38 +110,97 @@ class ScientificCalculator(Screen):
 	def pos_neg(self):
 		NormalCalculator.pos_neg(self)
 
-	def equals(self):
-		NormalCalculator.equals(self)
-
 	# New functions
-	def bracketStart(self):
+
+	def bracket(self, bracket):
+		self.scientificSign = "Used"
+
 		prior = self.ids.calc_input.text
 
-		self.ids.calc_input.text = prior + "("
-
-	def bracketStop(self):
-		prior = self.ids.calc_input.text
-
-		self.ids.calc_input.text = prior + ")"
+		self.ids.calc_input.text = prior + bracket
 
 	def factorial(self):
-		pass
+		self.scientificSign = "Used"
+
+		prior = self.ids.calc_input.text
+
+		if self.signUsed:
+			pass
+		else:
+			self.ids.calc_input.text = prior + "!"
+			self.signUsed = "!"
 
 	def xtothepower(self):
-		pass
+		prior = self.ids.calc_input.text
+
+		self.ids.calc_input.text = prior + "**"
 
 	def eularsNo(self):
-		pass
+		self.scientificSign = "Used"
+
+		prior = self.ids.calc_input.text
+
+		if self.signUsed:
+			pass
+		else:
+			self.ids.calc_input.text = prior + "e"
+			self.signUsed = "e"
 
 	def pie(self):
-		pass
+		self.scientificSign = "Used"
+
+		prior = self.ids.calc_input.text
+
+		if self.signUsed:
+			pass
+		else:
+			self.ids.calc_input.text = prior + "pie"
+			self.signUsed = "pie"
 
 	def squareroot(self):
-		pass
+		self.scientificSign = "Used"
+
+		prior = self.ids.calc_input.text
+
+		if self.signUsed:
+			pass
+		else:
+			self.ids.calc_input.text = prior + "sqrt"
+			self.signUsed = "sqrt"
 
 	def trigonmetryFunction(self, func):
-		pass
-	
+		self.scientificSign = "Used"
+
+		prior = self.ids.calc_input.text
+
+		if self.signUsed:
+			pass
+		else:
+			self.ids.calc_input.text = prior + func
+			self.signUsed = func
+
+
+	def equals(self):
+		prior = self.ids.calc_input.text
+		answer = ""
+		try:
+			answer = eval(prior)
+		except Exception as e:
+			print(e)
+			answer = "error"
+
+		if self.scientificSign:
+			# Runs if any scientific sign is used
+			answer = calculations.Cal(prior, self.signUsed, self.mathSignUsed).result()
+			
+
+
+			self.signUsed = None
+			self.scientificSign = None
+			self.mathSignUsed = None
+		
+		answer = str(answer)
+		self.ids.calc_input.text = answer
 
 
 class UnitConverter(Screen):
@@ -149,6 +220,7 @@ sm.add_widget(Converters(name='converters'))
 
 class CalculatorApp(App):
 	def build(self):
+		Window.clearcolor = (1,1,1,1)
 		return Builder.load_file('normal.kv')
 
 
