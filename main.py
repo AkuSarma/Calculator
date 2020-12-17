@@ -136,26 +136,13 @@ class ScientificCalculator(Screen):
 		self.ids.calc_input.text = prior + "**"
 
 	def eularsNo(self):
-		self.scientificSign = "Used"
-
 		prior = self.ids.calc_input.text
 
-		if self.signUsed:
-			pass
-		else:
-			self.ids.calc_input.text = prior + "e"
-			self.signUsed = "e"
+		self.ids.calc_input.text = prior + "*2.7182"
 
 	def pie(self):
-		self.scientificSign = "Used"
-
 		prior = self.ids.calc_input.text
-
-		if self.signUsed:
-			pass
-		else:
-			self.ids.calc_input.text = prior + "pie"
-			self.signUsed = "pie"
+		self.ids.calc_input.text = prior + "*3.1416"
 
 	def squareroot(self):
 		self.scientificSign = "Used"
