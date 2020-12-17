@@ -15,11 +15,21 @@ class Cal:
                 
                 self.lis.append(math.factorial(int(separateditem)))
 
+            elif self.signUsed == "√":
+                separateditem = separatedList[0][1:]
+
+                self.lis.append(math.sqrt(int(separateditem)))
+
         if self.signUsed in separatedList[1]:
             if self.signUsed == "!":
                 separateditem = separatedList[0][:-1]
                 
                 self.lis.append(math.factorial(int(separateditem)))
+
+            elif self.signUsed == "√":
+                separateditem = separatedList[1][1:]
+
+                self.lis.append(math.sqrt(int(separateditem)))
 
         if self.signUsed not in separatedList[0]:
             self.lis.append(separatedList[0])

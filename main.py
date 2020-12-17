@@ -152,8 +152,8 @@ class ScientificCalculator(Screen):
 		if self.signUsed:
 			pass
 		else:
-			self.ids.calc_input.text = prior + "sqrt"
-			self.signUsed = "sqrt"
+			self.ids.calc_input.text = prior + "√"
+			self.signUsed = "√"
 
 	def trigonmetryFunction(self, func):
 		self.scientificSign = "Used"
