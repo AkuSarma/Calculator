@@ -80,7 +80,7 @@ class NormalCalculator(Screen):
 class ScientificCalculator(Screen):
 	scientificSign = None # To check if there is any scientific sign used
 	signUsed = None # Keep the record of the sign used
-	mathSignUsed = None
+	mathSignUsed = None # keep the record of the math sign used
 
 	def clear(self):
 		NormalCalculator.clear(self)
@@ -191,23 +191,46 @@ class ScientificCalculator(Screen):
 
 
 class UnitConverter(Screen):
-	pass
+	def addUnit(self, unit):
+		try:
+			inp = int(self.ids.weightInput.text)
 
+			self.ids.weightInput.text = f"{inp}{unit}"
 
-class Converters(Screen):
-	pass
+		except Exception as e:
+			print(e)
+
+	def convert(self, to):
+		inp = self.ids.weightInput.text
+		signUsed = ""
+
+		if "kg" in inp:
+			inp = inp.replace("kg", "")
+			signUsed = "kg"
+
+		elif "g" in inp:
+			inp = inp.replace("g", "")
+			signUsed = "g"
+
+		elif "lb" in inp:
+			inp = inp.replace("lb", "")
+			signUsed = "lb"
+
+		else:
+			inp = inp.replace("ounc", "")
+			signUsed = "ounc"
+		
+		self.ids.weightInput.text = ""
+		self.ids.weightAnswer.text = inp
+
 		
 
-sm = ScreenManager()
-sm.add_widget(NormalCalculator(name='normalcalculator'))
-sm.add_widget(ScientificCalculator(name='scientificcalculator'))
-sm.add_widget(UnitConverter(name='unitconverter'))
-sm.add_widget(Converters(name='converters'))
+class WindowsManager(ScreenManager):
+	pass
 
 
 class CalculatorApp(App):
 	def build(self):
-		Window.clearcolor = (1,1,1,1)
 		return Builder.load_file('normal.kv')
 
 

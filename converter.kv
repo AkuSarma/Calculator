@@ -22,67 +22,85 @@
 				on_press:
 					root.manager.current = "normalcalculator"
 
-		GridLayout:
-			cols: 3
+		TabbedPanel:
+			do_default_tab: False
 
-			# row 1
-			Button:
+			TabbedPanelItem:
 				text: "Weight"
-				on_press:
-					root.manager.current = "converters"
 
-			Button:
-				text: "Temperature"
+				GridLayout:
+					cols: 1
 
-			Button:
-				text: "Energy"
+					TextInput:
+						id: weightInput
+						font_size: 50
+						size_hint: (1, .30)
 
-			# row 2
-			Button:
-				text: "Area"
 
-			Button:
-				text: "Speed"
+					GridLayout:
+						cols: 4
+						size_hint: (1, .40)
 
-			Button:
-				text: "Time"
+						Button:
+							text: "from kg"
+							on_press:
+								root.addUnit("kg")
 
-			# row 3
-			Button:
-				text: "Power"
+						Button:
+							text: "from gram"
+							on_press:
+								root.addUnit("g")
 
-			Button:
-				text: "Data"
+						Button:
+							text: "from pounds"
+							on_press:
+								root.addUnit("lb")
 
-			Button:
+						Button:
+							text: "from ounces"
+							on_press:
+								root.addUnit("ounc")
+
+						Button:
+							text: "to kg"
+							on_press:
+								root.convert("kg")
+
+						Button:
+							text: "to gram"
+							on_press:
+								root.convert("g")
+
+						Button:
+							text: "to pounds"
+							on_press:
+								root.convert("lb")
+
+						Button:
+							text: "to ounces"
+							on_press:
+								root.convert("ounc")
+
+					Label:
+						id: weightAnswer
+						text: ""
+
+			TabbedPanelItem:
 				text: "Length"
+				Button:
+					text: "Length"
 
-<Converters>:
-	name: "converters"
-	BoxLayout:
-		orientation: "vertical"
-		size: root.width, root.height
-		Button:
-			size_hint: (0.9, 0.05)
-			text: "<<"
-			on_press:
-				root.manager.current = "unitconverter"
-			
-		TextInput:
-			id: converter_input
-			text: ""
-			size_hint: (1, .17)
+			TabbedPanelItem:
+				text: "Time"
+				Button:
+					text: "Time"
 
-		GridLayout:
-			cols: 3
-			Button:
-				id: converter_btn1
-				text: ""
+			TabbedPanelItem:
+				text: "Distance"
+				Button:
+					text: "Distance"
 
-			Button:
-				id: converter_btn2
-				text: ""
-
-			Button:
-				id: converter_btn3
-				text: ""
+			TabbedPanelItem:
+				text: "Data"
+				Button:
+					text: "Data"
