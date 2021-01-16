@@ -191,7 +191,8 @@ class ScientificCalculator(Screen):
 
 
 class UnitConverter(Screen):
-	def addUnit(self, unit):
+	# converter for weight
+	def weightAddUnit(self, unit):
 		try:
 			inp = int(self.ids.weightInput.text)
 
@@ -200,28 +201,87 @@ class UnitConverter(Screen):
 		except Exception as e:
 			print(e)
 
-	def convert(self, to):
+	def weightConvert(self, to):
+		"""
+		Converter for weight
+		"""
 		inp = self.ids.weightInput.text
-		signUsed = ""
 
 		if "kg" in inp:
 			inp = inp.replace("kg", "")
-			signUsed = "kg"
+
+			if to == "kg":
+				inp = str(inp) + "kg"
+				pass
+
+			elif to == "g":
+				inp = int(inp) * 1000
+				inp = str(inp) + "g"
+
+			elif to == "lbs":
+				inp = int(inp) * 2.205
+				inp = str(inp) + "lbs"
+			else:
+				inp = int(inp) * 35.274
+				inp = str(inp) + "oz"
 
 		elif "g" in inp:
 			inp = inp.replace("g", "")
-			signUsed = "g"
 
-		elif "lb" in inp:
-			inp = inp.replace("lb", "")
-			signUsed = "lb"
+			if to == "kg":
+				inp = int(inp) / 1000
+				inp = str(inp) + "kg"
+
+			elif to == "g":
+				inp = str(inp) + "g"
+
+			elif to == "lbs":
+				inp = int(inp) / 454
+				inp = str(inp) + "lbs"
+			else:
+				inp = int(inp) / 28.35
+				inp = str(inp) + "oz"
+
+		elif "lbs" in inp:
+			inp = inp.replace("lbs", "")
+
+			if to == "kg":
+				inp = int(inp) / 2.205
+				inp = str(inp) + "kg"
+
+			elif to == "g":
+				inp = int(inp) * 454
+				inp = str(inp) + "g"
+
+			elif to == "lbs":
+				inp = str(inp) + "lbs"
+
+			else:
+				inp = int(inp) * 16
+				inp = str(inp) + "oz"
 
 		else:
-			inp = inp.replace("ounc", "")
-			signUsed = "ounc"
+			inp = inp.replace("oz", "")
+
+			if to == "kg":
+				inp = int(inp) * 35.274
+				inp = str(inp) + "kg"
+
+			elif to == "g":
+				inp = int(inp) * 28.35
+				inp = str(inp) + "g"
+
+			elif to == "lbs":
+				inp = int(inp) / 16
+				inp = str(inp) + "lbs"
+
+			else:
+				inp = str(inp) + "oz"
 		
 		self.ids.weightInput.text = ""
 		self.ids.weightAnswer.text = inp
+
+	# Converter for length
 
 		
 

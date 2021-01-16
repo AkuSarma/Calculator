@@ -44,42 +44,42 @@
 						Button:
 							text: "from kg"
 							on_press:
-								root.addUnit("kg")
+								root.weightAddUnit("kg")
 
 						Button:
 							text: "from gram"
 							on_press:
-								root.addUnit("g")
+								root.weightAddUnit("g")
 
 						Button:
 							text: "from pounds"
 							on_press:
-								root.addUnit("lb")
+								root.weightAddUnit("lbs")
 
 						Button:
 							text: "from ounces"
 							on_press:
-								root.addUnit("ounc")
+								root.weightAddUnit("oz")
 
 						Button:
 							text: "to kg"
 							on_press:
-								root.convert("kg")
+								root.weightConvert("kg")
 
 						Button:
 							text: "to gram"
 							on_press:
-								root.convert("g")
+								root.weightConvert("g")
 
 						Button:
 							text: "to pounds"
 							on_press:
-								root.convert("lb")
+								root.weightConvert("lbs")
 
 						Button:
 							text: "to ounces"
 							on_press:
-								root.convert("ounc")
+								root.weightConvert("oz")
 
 					Label:
 						id: weightAnswer
