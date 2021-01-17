@@ -191,20 +191,22 @@ class ScientificCalculator(Screen):
 
 
 class UnitConverter(Screen):
-	# converter for weight
-	def weightAddUnit(self, unit):
+	def addUnit(self, unit, id):
 		try:
-			inp = int(self.ids.weightInput.text)
+			
+			if id == "weight":
+				inp = self.ids.weightInput.text
+				self.ids.weightInput.text = f"{inp}{unit}"
 
-			self.ids.weightInput.text = f"{inp}{unit}"
+			elif id == "length":
+				inp = self.ids.lengthInput.text
+				self.ids.lengthInput.text = f"{inp}{unit}"
 
 		except Exception as e:
 			print(e)
 
+	# converter for weight
 	def weightConvert(self, to):
-		"""
-		Converter for weight
-		"""
 		inp = self.ids.weightInput.text
 
 		if "kg" in inp:
@@ -282,6 +284,82 @@ class UnitConverter(Screen):
 		self.ids.weightAnswer.text = inp
 
 	# Converter for length
+	def lengthConvert(self, to):
+		inp = self.ids.lengthInput.text
+
+		if "km" in inp:
+			inp = inp.replace("km", "")
+
+			if to == "m":
+				inp = int(inp) * 1000
+				inp = str(inp) + "m"
+
+			elif to == "km":
+				inp = str(inp) + "km"
+
+			elif to == "mi":
+				inp = int(inp) / 1.609
+				inp = str(inp) + "mi"
+			else:
+				inp = int(inp) * 1094
+				inp = str(inp) + "yd"
+
+		elif "m" in inp:
+			inp = inp.replace("m", "")
+
+			if to == "m":
+				inp = str(inp) + "m"
+
+			elif to == "km":
+				inp = int(inp) / 1000
+				inp = str(inp) + "km"
+
+			elif to == "mi":
+				inp = int(inp) / 1609
+				inp = str(inp) + "mi"
+			else:
+				inp = int(inp) * 1.094
+				inp = str(inp) + "yd"
+
+		elif "mi" in inp:
+			inp = inp.replace("mi", "")
+
+			if to == "m":
+				inp = int(inp) * 1609
+				inp = str(inp) + "m"
+
+			elif to == "km":
+				inp = int(inp) * 1.609
+				inp = str(inp) + "km"
+
+			elif to == "mi":
+				inp = str(inp) + "mi"
+
+			else:
+				inp = int(inp) * 1760
+				inp = str(inp) + "yd"
+
+		else:
+			inp = inp.replace("yd", "")
+
+			if to == "m":
+				inp = int(inp) / 1.094
+				inp = str(inp) + "m"
+
+			elif to == "km":
+				inp = int(inp) / 1094
+				inp = str(inp) + "km"
+
+			elif to == "mi":
+				inp = int(inp) / 1760
+				inp = str(inp) + "mi"
+
+			else:
+				inp = str(inp) + "yd"
+
+		self.ids.lengthInput.text = ""
+		self.ids.lengthAnswer.text = inp
+
 
 		
 

@@ -44,22 +44,22 @@
 						Button:
 							text: "from kg"
 							on_press:
-								root.weightAddUnit("kg")
+								root.addUnit("kg", "weight")
 
 						Button:
 							text: "from gram"
 							on_press:
-								root.weightAddUnit("g")
+								root.addUnit("g", "weight")
 
 						Button:
 							text: "from pounds"
 							on_press:
-								root.weightAddUnit("lbs")
+								root.addUnit("lbs", "weight")
 
 						Button:
 							text: "from ounces"
 							on_press:
-								root.weightAddUnit("oz")
+								root.addUnit("oz", "weight")
 
 						Button:
 							text: "to kg"
@@ -87,8 +87,63 @@
 
 			TabbedPanelItem:
 				text: "Length"
-				Button:
-					text: "Length"
+				
+				GridLayout:
+					cols: 1
+
+					TextInput:
+						id: lengthInput
+						font_size: 50
+						size_hint: (1, .30)
+
+
+					GridLayout:
+						cols: 4
+						size_hint: (1, .40)
+
+						Button:
+							text: "from meter"
+							on_press:
+								root.addUnit("m", "length")
+
+						Button:
+							text: "from kilometer"
+							on_press:
+								root.addUnit("km", "length")
+
+						Button:
+							text: "from miles"
+							on_press:
+								root.addUnit("mi", "length")
+
+						Button:
+							text: "from yard"
+							on_press:
+								root.addUnit("yd", "length")
+
+						Button:
+							text: "to meter"
+							on_press:
+								root.lengthConvert("m")
+
+						Button:
+							text: "to kilometer"
+							on_press:
+								root.lengthConvert("km")
+
+						Button:
+							text: "to miles"
+							on_press:
+								root.lengthConvert("mi")
+
+						Button:
+							text: "to yard"
+							on_press:
+								root.lengthConvert("yd")
+
+					Label:
+						id: lengthAnswer
+						text: ""
 
 			TabbedPanelItem:
 				text: "Time"
