@@ -147,8 +147,64 @@
 
 			TabbedPanelItem:
 				text: "Time"
-				Button:
-					text: "Time"
+
+				GridLayout:
+					cols: 1
+
+					TextInput:
+						id: timeInput
+						font_size: 50
+						size_hint: (1, .30)
+
+
+					GridLayout:
+						cols: 4
+						size_hint: (1, .40)
+
+						Button:
+							text: "from second"
+							on_press:
+								root.addUnit("s", "time")
+
+						Button:
+							text: "from minute"
+							on_press:
+								root.addUnit("m", "time")
+
+						Button:
+							text: "milisecond"
+							on_press:
+								root.addUnit("ms", "time")
+
+						Button:
+							text: "from hour"
+							on_press:
+								root.addUnit("h", "time")
+
+						Button:
+							text: "to second"
+							on_press:
+								root.timeConvert("s")
+
+						Button:
+							text: "to minute"
+							on_press:
+								root.timeConvert("m")
+
+						
+						Button:
+							text: "to milisecond"
+							on_press:
+								root.timeConvert("ms")
+
+						Button:
+							text: "to hour"
+							on_press:
+								root.timeConvert("h")
+
+					Label:
+						id: timeAnswer
+						text: ""
 
 			TabbedPanelItem:
 				text: "Distance"

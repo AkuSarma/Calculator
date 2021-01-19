@@ -202,6 +202,10 @@ class UnitConverter(Screen):
 				inp = self.ids.lengthInput.text
 				self.ids.lengthInput.text = f"{inp}{unit}"
 
+			elif id == "time":
+				inp = self.ids.timeInput.text
+				self.ids.timeInput.text = f"{inp}{unit}"
+
 		except Exception as e:
 			print(e)
 
@@ -359,6 +363,87 @@ class UnitConverter(Screen):
 
 		self.ids.lengthInput.text = ""
 		self.ids.lengthAnswer.text = inp
+
+	# converter for time
+	def timeConvert(self, to):
+		inp = self.ids.timeInput.text
+
+		if "s" in inp:
+			inp = inp.replace("s", "")
+
+			if to == "s":
+				inp = str(inp) + "s"
+
+			elif to == "m":
+				inp = int(inp) / 60
+				inp = str(inp) + "m"
+
+			elif to == "ms":
+				inp = int(inp) * 1000
+				inp = str(inp) + "ms"
+			else:
+				inp = int(inp) / 3600
+				inp = str(inp) + "h"
+
+		elif "m" in inp:
+			inp = inp.replace("m", "")
+
+			if to == "s":
+				inp = int(inp) * 60
+				inp = str(inp) + "s"
+
+			elif to == "m":
+				inp = str(inp) + "m"
+
+			elif to == "ms":
+				inp = int(inp) * 60000
+				inp = str(inp) + "ms"
+			else:
+				inp = int(inp) / 60
+				inp = str(inp) + "h"
+
+		elif "ms" in inp:
+			inp = inp.replace("ms", "")
+
+			if to == "s":
+				inp = int(inp) / 1000
+				inp = str(inp) + "s"
+
+			elif to == "m":
+				inp = int(inp) / 60000
+				inp = str(inp) + "m"
+
+			elif to == "ms":
+				inp = str(inp) + "ms"
+			else:
+				inp = int(inp) / 3600000
+				inp = str(inp) + "h"
+
+		else:
+			inp = inp.replace("h", "")
+
+			if to == "s":
+				inp = int(inp) * 3600
+				inp = str(inp) + "s"
+
+			elif to == "m":
+				inp = int(inp) * 60
+				inp = str(inp) + "m"
+
+			elif to == "ms":
+				inp = int(inp) * 3600000
+				inp = str(inp) + "ms"
+			else:
+				inp = str(inp) + "h"
+
+		self.ids.timeInput.text = ""
+		self.ids.timeAnswer.text = inp
+
+	def distanceConvert(self, to):
+		pass
+
+	def dataConvert(self, to):
+		pass
 
 
 		
