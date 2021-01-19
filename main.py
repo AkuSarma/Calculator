@@ -206,6 +206,10 @@ class UnitConverter(Screen):
 				inp = self.ids.timeInput.text
 				self.ids.timeInput.text = f"{inp}{unit}"
 
+			elif id == "distance":
+				inp = self.ids.distanceInput.text
+				self.ids.distanceInput.text = f"{inp}{unit}"
+
 		except Exception as e:
 			print(e)
 
@@ -440,10 +444,150 @@ class UnitConverter(Screen):
 		self.ids.timeAnswer.text = inp
 
 	def distanceConvert(self, to):
-		pass
+		inp = self.ids.distanceInput.text
+
+		if "m" in inp:
+			inp = inp.replace("m", "")
+
+			if to == "m":
+				inp = str(inp) + "m"
+
+			elif to == "cm":
+				inp = int(inp)
+				inp = str(inp) + "cm"
+
+			elif to == "mm":
+				inp = int(inp)
+				inp = str(inp) + "mm"
+			else:
+				inp = int(inp)
+				inp = str(inp) + "km"
+
+		elif "cm" in inp:
+			inp = inp.replace("cm", "")
+
+			if to == "m":
+				inp = int(inp)
+				inp = str(inp) + "m"
+
+			elif to == "cm":
+				inp = str(inp) + "cm"
+
+			elif to == "mm":
+				inp = int(inp)
+				inp = str(inp) + "mm"
+			else:
+				inp = int(inp)
+				inp = str(inp) + "km"
+
+		elif "mm" in inp:
+			inp = inp.replace("mm", "")
+
+			if to == "m":
+				inp = int(inp)
+				inp = str(inp) + "m"
+
+			elif to == "cm":
+				inp = int(inp)
+				inp = str(inp) + "cm"
+
+			elif to == "mm":
+				inp = str(inp) + "mm"
+			else:
+				inp = int(inp)
+				inp = str(inp) + "km"
+		else:
+			inp = inp.replace("km", "")
+
+			if to == "m":
+				inp = int(inp)
+				inp = str(inp) + "m"
+
+			elif to == "cm":
+				inp = int(inp)
+				inp = str(inp) + "cm"
+
+			elif to == "mm":
+				inp = int(inp)
+				inp = str(inp) + "mm"
+			else:
+				inp = str(inp) + "km"
+
+		self.ids.distanceInput.text = ""
+		self.ids.distanceAnswer.text = inp
 
 	def dataConvert(self, to):
-		pass
+		inp = self.ids.dataInput.text
+
+		if "b" in inp:
+			inp = inp.replace("b", "")
+
+			if to == "b":
+				inp = str(inp) + "b"
+
+			elif to == "kb":
+				inp = int(inp)
+				inp = str(inp) + "kb"
+
+			elif to == "mb":
+				inp = int(inp)
+				inp = str(inp) + "mb"
+			else:
+				inp = int(inp)
+				inp = str(inp) + "gb"
+
+		elif "kb" in inp:
+			inp = inp.replace("kb", "")
+
+			if to == "b":
+				inp = int(inp)
+				inp = str(inp) + "b"
+
+			elif to == "kb":
+				inp = str(inp) + "kb"
+
+			elif to == "mb":
+				inp = int(inp)
+				inp = str(inp) + "mb"
+			else:
+				inp = int(inp)
+				inp = str(inp) + "gb"
+
+		elif "mb" in inp:
+			inp = inp.replace("mb", "")
+
+			if to == "b":
+				inp = int(inp)
+				inp = str(inp) + "b"
+
+			elif to == "kb":
+				inp = int(inp)
+				inp = str(inp) + "kb"
+
+			elif to == "mb":
+				inp = str(inp) + "mb"
+			else:
+				inp = int(inp)
+				inp = str(inp) + "gb"
+		else:
+			inp = inp.replace("gb", "")
+
+			if to == "b":
+				inp = int(inp)
+				inp = str(inp) + "b"
+
+			elif to == "kb":
+				inp = int(inp)
+				inp = str(inp) + "kb"
+
+			elif to == "mb":
+				inp = int(inp)
+				inp = str(inp) + "mb"
+			else:
+				inp = str(inp) + "gb"
+
+		self.ids.distanceInput.text = ""
+		self.ids.distanceAnswer.text = inp
 
 
 		

@@ -208,10 +208,122 @@
 
 			TabbedPanelItem:
 				text: "Distance"
-				Button:
-					text: "Distance"
+				
+				GridLayout:
+					cols: 1
+
+					TextInput:
+						id: distanceInput
+						font_size: 50
+						size_hint: (1, .30)
+
+
+					GridLayout:
+						cols: 4
+						size_hint: (1, .40)
+
+						Button:
+							text: "from milimeter"
+							on_press:
+								root.addUnit("mm", "distance")
+
+						Button:
+							text: "from centemeter"
+							on_press:
+								root.addUnit("cm", "distance")
+
+						Button:
+							text: "from meter"
+							on_press:
+								root.addUnit("m", "distance")
+
+						Button:
+							text: "from kilometer"
+							on_press:
+								root.addUnit("km", "distance")
+
+						Button:
+							text: "to milimeter"
+							on_press:
+								root.distanceConvert("mm")
+
+						Button:
+							text: "to centimeter"
+							on_press:
+								root.distanceConvert("cm")
+
+						
+						Button:
+							text: "to meter"
+							on_press:
+								root.distanceConvert("m")
+
+						Button:
+							text: "to kilometer"
+							on_press:
+								root.distanceConvert("km")
+
+					Label:
+						id: distanceAnswer
+						text: ""
 
 			TabbedPanelItem:
 				text: "Data"
-				Button:
-					text: "Data"
+	
+				GridLayout:
+					cols: 1
+
+					TextInput:
+						id: dataInput
+						font_size: 50
+						size_hint: (1, .30)
+
+
+					GridLayout:
+						cols: 4
+						size_hint: (1, .40)
+
+						Button:
+							text: "from byte"
+							on_press:
+								root.addUnit("b", "data")
+
+						Button:
+							text: "from kilobyte"
+							on_press:
+								root.addUnit("kb", "data")
+
+						Button:
+							text: "from megabyte"
+							on_press:
+								root.addUnit("mb", "data")
+
+						Button:
+							text: "from gigabyte"
+							on_press:
+								root.addUnit("gb", "data")
+
+						Button:
+							text: "to byte"
+							on_press:
+								root.dataConvert("b")
+
+						Button:
+							text: "to kilobyte"
+							on_press:
+								root.dataConvert("kb")
+
+						
+						Button:
+							text: "to megabyte"
+							on_press:
+								root.dataConvert("mb")
+
+						Button:
+							text: "to gigabyte"
+							on_press:
+								root.dataConvert("gb")
+
+					Label:
+						id: dataAnswer
+						text: ""
