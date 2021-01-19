@@ -210,6 +210,10 @@ class UnitConverter(Screen):
 				inp = self.ids.distanceInput.text
 				self.ids.distanceInput.text = f"{inp}{unit}"
 
+			elif id == "data":
+				inp = self.ids.dataInput.text
+				self.ids.dataInput.text = f"{inp}{unit}"
+
 		except Exception as e:
 			print(e)
 
@@ -446,24 +450,7 @@ class UnitConverter(Screen):
 	def distanceConvert(self, to):
 		inp = self.ids.distanceInput.text
 
-		if "m" in inp:
-			inp = inp.replace("m", "")
-
-			if to == "m":
-				inp = str(inp) + "m"
-
-			elif to == "cm":
-				inp = int(inp)
-				inp = str(inp) + "cm"
-
-			elif to == "mm":
-				inp = int(inp)
-				inp = str(inp) + "mm"
-			else:
-				inp = int(inp)
-				inp = str(inp) + "km"
-
-		elif "cm" in inp:
+		if "cm" in inp:
 			inp = inp.replace("cm", "")
 
 			if to == "m":
@@ -496,7 +483,7 @@ class UnitConverter(Screen):
 			else:
 				inp = int(inp)
 				inp = str(inp) + "km"
-		else:
+		elif "km" in inp:
 			inp = inp.replace("km", "")
 
 			if to == "m":
@@ -513,30 +500,30 @@ class UnitConverter(Screen):
 			else:
 				inp = str(inp) + "km"
 
+		else:
+			inp = inp.replace("m", "")
+
+			if to == "m":
+				inp = str(inp) + "m"
+
+			elif to == "cm":
+				inp = int(inp)
+				inp = str(inp) + "cm"
+
+			elif to == "mm":
+				inp = int(inp)
+				inp = str(inp) + "mm"
+			else:
+				inp = int(inp)
+				inp = str(inp) + "km"
+
 		self.ids.distanceInput.text = ""
 		self.ids.distanceAnswer.text = inp
 
 	def dataConvert(self, to):
 		inp = self.ids.dataInput.text
 
-		if "b" in inp:
-			inp = inp.replace("b", "")
-
-			if to == "b":
-				inp = str(inp) + "b"
-
-			elif to == "kb":
-				inp = int(inp)
-				inp = str(inp) + "kb"
-
-			elif to == "mb":
-				inp = int(inp)
-				inp = str(inp) + "mb"
-			else:
-				inp = int(inp)
-				inp = str(inp) + "gb"
-
-		elif "kb" in inp:
+		if "kb" in inp:
 			inp = inp.replace("kb", "")
 
 			if to == "b":
@@ -569,7 +556,7 @@ class UnitConverter(Screen):
 			else:
 				inp = int(inp)
 				inp = str(inp) + "gb"
-		else:
+		elif "gb" in inp:
 			inp = inp.replace("gb", "")
 
 			if to == "b":
@@ -586,8 +573,25 @@ class UnitConverter(Screen):
 			else:
 				inp = str(inp) + "gb"
 
-		self.ids.distanceInput.text = ""
-		self.ids.distanceAnswer.text = inp
+		else:
+			inp = inp.replace("b", "")
+
+			if to == "b":
+				inp = str(inp) + "b"
+
+			elif to == "kb":
+				inp = int(inp)
+				inp = str(inp) + "kb"
+
+			elif to == "mb":
+				inp = int(inp)
+				inp = str(inp) + "mb"
+			else:
+				inp = int(inp)
+				inp = str(inp) + "gb"
+
+		self.ids.dataInput.text = ""
+		self.ids.dataAnswer.text = inp
 
 
 		
