@@ -2,7 +2,6 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
-import calculations
 
 Window.size = (500, 600)
 
@@ -75,119 +74,6 @@ class NormalCalculator(Screen):
 
 		else:
 			self.ids.calc_input.text = answer
-
-
-class ScientificCalculator(Screen):
-	scientificSign = None # To check if there is any scientific sign used
-	signUsed = None # Keep the record of the sign used
-	mathSignUsed = None # keep the record of the math sign used
-
-	def clear(self):
-		NormalCalculator.clear(self)
-		self.signUsed = None
-		self.scientificSign = None
-		self.mathSignUsed = None
-
-	def button_press(self, button):
-		NormalCalculator.button_press(self, button)
-
-	def math_sign(self, sign):
-		if self.mathSignUsed:
-			self.equals()
-		else:
-			NormalCalculator.math_sign(self, sign)
-			self.mathSignUsed = sign
-
-	def percent(self):
-		NormalCalculator.percent(self)
-
-	def dot(self):
-		NormalCalculator.dot(self)
-
-	def remove(self):
-		NormalCalculator.remove(self)
-
-	def pos_neg(self):
-		NormalCalculator.pos_neg(self)
-
-	# New functions
-
-	def bracket(self, bracket):
-		self.scientificSign = "Used"
-
-		prior = self.ids.calc_input.text
-
-		self.ids.calc_input.text = prior + bracket
-
-	def factorial(self):
-		self.scientificSign = "Used"
-
-		prior = self.ids.calc_input.text
-
-		if self.signUsed:
-			pass
-		else:
-			self.ids.calc_input.text = prior + "!"
-			self.signUsed = "!"
-
-	def xtothepower(self):
-		prior = self.ids.calc_input.text
-
-		self.ids.calc_input.text = prior + "**"
-
-	def eularsNo(self):
-		prior = self.ids.calc_input.text
-
-		self.ids.calc_input.text = prior + "*2.7182"
-
-	def pie(self):
-		prior = self.ids.calc_input.text
-		self.ids.calc_input.text = prior + "*3.1416"
-
-	def squareroot(self):
-		self.scientificSign = "Used"
-
-		prior = self.ids.calc_input.text
-
-		if self.signUsed:
-			pass
-		else:
-			self.ids.calc_input.text = prior + "√"
-			self.signUsed = "√"
-
-	def trigonmetryFunction(self, func):
-		self.scientificSign = "Used"
-
-		prior = self.ids.calc_input.text
-
-		if self.signUsed:
-			pass
-		else:
-			self.ids.calc_input.text = prior + func
-			self.signUsed = func
-
-
-	def equals(self):
-		prior = self.ids.calc_input.text
-		answer = ""
-		try:
-			answer = eval(prior)
-		except Exception as e:
-			print(e)
-			answer = "error"
-
-		if self.scientificSign:
-			# Runs if any scientific sign is used
-			answer = calculations.Cal(prior, self.signUsed, self.mathSignUsed).result()
-			
-
-
-			self.signUsed = None
-			self.scientificSign = None
-			self.mathSignUsed = None
-		
-		answer = str(answer)
-		self.ids.calc_input.text = answer
 
 
 class UnitConverter(Screen):
@@ -454,48 +340,48 @@ class UnitConverter(Screen):
 			inp = inp.replace("cm", "")
 
 			if to == "m":
-				inp = int(inp)
+				inp = int(inp) / 100
 				inp = str(inp) + "m"
 
 			elif to == "cm":
 				inp = str(inp) + "cm"
 
 			elif to == "mm":
-				inp = int(inp)
+				inp = int(inp) * 10
 				inp = str(inp) + "mm"
 			else:
-				inp = int(inp)
+				inp = int(inp) / 100000
 				inp = str(inp) + "km"
 
 		elif "mm" in inp:
 			inp = inp.replace("mm", "")
 
 			if to == "m":
-				inp = int(inp)
+				inp = int(inp) / 1000
 				inp = str(inp) + "m"
 
 			elif to == "cm":
-				inp = int(inp)
+				inp = int(inp) / 10
 				inp = str(inp) + "cm"
 
 			elif to == "mm":
 				inp = str(inp) + "mm"
 			else:
-				inp = int(inp)
+				inp = int(inp) / 1000000
 				inp = str(inp) + "km"
 		elif "km" in inp:
 			inp = inp.replace("km", "")
 
 			if to == "m":
-				inp = int(inp)
+				inp = int(inp) * 1000
 				inp = str(inp) + "m"
 
 			elif to == "cm":
-				inp = int(inp)
+				inp = int(inp) * 100000
 				inp = str(inp) + "cm"
 
 			elif to == "mm":
-				inp = int(inp)
+				inp = int(inp) * 1000000
 				inp = str(inp) + "mm"
 			else:
 				inp = str(inp) + "km"
@@ -507,14 +393,14 @@ class UnitConverter(Screen):
 				inp = str(inp) + "m"
 
 			elif to == "cm":
-				inp = int(inp)
+				inp = int(inp) * 100
 				inp = str(inp) + "cm"
 
 			elif to == "mm":
-				inp = int(inp)
+				inp = int(inp) * 1000
 				inp = str(inp) + "mm"
 			else:
-				inp = int(inp)
+				inp = int(inp) / 1000
 				inp = str(inp) + "km"
 
 		self.ids.distanceInput.text = ""
@@ -527,48 +413,49 @@ class UnitConverter(Screen):
 			inp = inp.replace("kb", "")
 
 			if to == "b":
-				inp = int(inp)
+				inp = int(inp) * 1024
 				inp = str(inp) + "b"
 
 			elif to == "kb":
 				inp = str(inp) + "kb"
 
 			elif to == "mb":
-				inp = int(inp)
+				inp = int(inp) / 1024
 				inp = str(inp) + "mb"
 			else:
-				inp = int(inp)
+				inp = int(inp) / 1048576
 				inp = str(inp) + "gb"
 
 		elif "mb" in inp:
 			inp = inp.replace("mb", "")
 
 			if to == "b":
-				inp = int(inp)
+				inp = int(inp) * 1048576
 				inp = str(inp) + "b"
 
 			elif to == "kb":
-				inp = int(inp)
+				inp = int(inp) * 1024
 				inp = str(inp) + "kb"
 
 			elif to == "mb":
 				inp = str(inp) + "mb"
 			else:
-				inp = int(inp)
+				inp = int(inp) / 1024
 				inp = str(inp) + "gb"
+
 		elif "gb" in inp:
 			inp = inp.replace("gb", "")
 
 			if to == "b":
-				inp = int(inp)
+				inp = int(inp) * 1073741824
 				inp = str(inp) + "b"
 
 			elif to == "kb":
-				inp = int(inp)
+				inp = int(inp) * 1048576
 				inp = str(inp) + "kb"
 
 			elif to == "mb":
-				inp = int(inp)
+				inp = int(inp) * 1024
 				inp = str(inp) + "mb"
 			else:
 				inp = str(inp) + "gb"
@@ -580,21 +467,23 @@ class UnitConverter(Screen):
 				inp = str(inp) + "b"
 
 			elif to == "kb":
-				inp = int(inp)
+				inp = int(inp) / 1024
 				inp = str(inp) + "kb"
 
 			elif to == "mb":
-				inp = int(inp)
+				inp = int(inp) / 1048576
 				inp = str(inp) + "mb"
 			else:
-				inp = int(inp)
+				inp = int(inp) / 1073741824
 				inp = str(inp) + "gb"
 
 		self.ids.dataInput.text = ""
 		self.ids.dataAnswer.text = inp
 
 
-		
+class History(Screen):
+	pass
+
 
 class WindowsManager(ScreenManager):
 	pass
@@ -602,7 +491,7 @@ class WindowsManager(ScreenManager):
 
 class CalculatorApp(App):
 	def build(self):
-		return Builder.load_file('normal.kv')
+		return Builder.load_file('main.kv')
 
 
 if __name__ == '__main__':

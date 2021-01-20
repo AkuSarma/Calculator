@@ -1,11 +1,10 @@
 #:kivy 2.0.0
-#:include scientific.kv
 #:include converter.kv
 
 WindowsManager:
 	NormalCalculator:
-	ScientificCalculator:
 	UnitConverter:
+	History:
 
 <NormalCalculator>:
 	name: "normalcalculator"
@@ -16,16 +15,23 @@ WindowsManager:
 
 		GridLayout:
 			size_hint: (1, .1)
-			cols: 2
+			cols: 3
+
 			Button:
-				font_size: 32
-				text: "Scientific cal"
+				size_hint: (.2, 1)
+				text: "H"
 				on_press:
-					root.manager.current = "scientificcalculator"
+					root.manager.current = "history"
 
 			Button:
 				font_size: 32
-				text: "Unit converter"
+				text: "calculator"
+				on_press:
+					root.manager.current = "normalcalculator"
+
+			Button:
+				font_size: 32
+				text: "converter"
 				on_press:
 					root.manager.current = "unitconverter"
 
@@ -179,3 +185,35 @@ WindowsManager:
 				font_size: 32
 				text: "="
 				on_press: root.equals()
+
+
+<History>:
+	name: "history"
+
+	BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+
+		GridLayout:
+			size_hint: (1, .1)
+			cols: 3
+
+			Button:
+				size_hint: (.2, 1)
+				text: "H"
+				on_press:
+					root.manager.current = "history"
+
+			Button:
+				font_size: 32
+				text: "calculator"
+				on_press:
+					root.manager.current = "normalcalculator"
+
+			Button:
+				font_size: 32
+				text: "converter"
+				on_press:
+					root.manager.current = "unitconverter"
+		Button:
+			text: "Hi"
