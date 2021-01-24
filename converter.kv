@@ -8,7 +8,14 @@
 		
 		GridLayout:
 			size_hint: (1, .1)
-			cols: 2
+			cols: 3
+
+			Button:
+				size_hint: (.2, 1)
+				font_size: 32
+				text: "H"
+				on_press:
+					root.manager.current = "history"
 
 			Button:
 				font_size: 32
@@ -19,6 +26,7 @@
 			Button:
 				font_size: 32
 				text: "converter"
+				disabled: True
 				on_press:
 					root.manager.current = "unitconverter"
 

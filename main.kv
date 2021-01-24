@@ -1,5 +1,6 @@
 #:kivy 2.0.0
 #:include converter.kv
+#:include history.kv
 
 WindowsManager:
 	NormalCalculator:
@@ -19,6 +20,7 @@ WindowsManager:
 
 			Button:
 				size_hint: (.2, 1)
+				font_size: 32
 				text: "H"
 				on_press:
 					root.manager.current = "history"
@@ -26,6 +28,7 @@ WindowsManager:
 			Button:
 				font_size: 32
 				text: "calculator"
+				disabled: True
 				on_press:
 					root.manager.current = "normalcalculator"
 
@@ -185,35 +188,3 @@ WindowsManager:
 				font_size: 32
 				text: "="
 				on_press: root.equals()
-
-
-<History>:
-	name: "history"
-
-	BoxLayout:
-		orientation: "vertical"
-		size: root.width, root.height
-
-		GridLayout:
-			size_hint: (1, .1)
-			cols: 3
-
-			Button:
-				size_hint: (.2, 1)
-				text: "H"
-				on_press:
-					root.manager.current = "history"
-
-			Button:
-				font_size: 32
-				text: "calculator"
-				on_press:
-					root.manager.current = "normalcalculator"
-
-			Button:
-				font_size: 32
-				text: "converter"
-				on_press:
-					root.manager.current = "unitconverter"
-		Button:
-			text: "Hi"

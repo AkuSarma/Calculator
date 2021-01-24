@@ -484,7 +484,6 @@ class UnitConverter(Screen):
 class History(Screen):
 	pass
 
-
 class WindowsManager(ScreenManager):
 	pass
 
