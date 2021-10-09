@@ -2,9 +2,25 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
+import sqlite3
+
 
 Window.size = (500, 600)
 
+
+# Creation of database
+
+db = sqlite3.connect('db.sqlite3')
+
+cursor = db.cursor()
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS calculations(
+        id INTEGER PRIMARY KEY,
+        calculation TEXT,
+		answer TEXT
+    )
+''')
+db.commit()
 
 class NormalCalculator(Screen):
 	def clear(self):
@@ -74,6 +90,11 @@ class NormalCalculator(Screen):
 
 		else:
 			self.ids.calc_input.text = answer
+
+		
+		cursor.execute(f'''INSERT INTO calculations(calculation, answer)
+                  VALUES({prior}, {answer})''')
+		db.commit()
 
 
 class UnitConverter(Screen):
