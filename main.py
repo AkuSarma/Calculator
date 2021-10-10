@@ -10,7 +10,7 @@ Window.size = (500, 600)
 
 # Creation of database
 
-db = sqlite3.connect('db.sqlite3')
+db = sqlite3.connect('historyData.sqlite3')
 
 cursor = db.cursor()
 cursor.execute('''
@@ -91,10 +91,14 @@ class NormalCalculator(Screen):
 		else:
 			self.ids.calc_input.text = answer
 
-		
-		cursor.execute(f'''INSERT INTO calculations(calculation, answer)
-                  VALUES({prior}, {answer})''')
-		db.commit()
+
+		try:
+			cursor.execute(('''INSERT INTO calculations(calculation, answer)
+					VALUES(?, ?)'''), (prior, str(answer)))
+			db.commit()
+		except Exception as e:
+			print(e)
+			print("Not added to the history database")
 
 
 class UnitConverter(Screen):
