@@ -1,4 +1,15 @@
 #:kivy 2.0.0
+
+<RV>:
+    viewclass: 'Label'
+    RecycleBoxLayout:
+        default_size: None, dp(56)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height
+        orientation: 'vertical'
+
+
 <History>:
 	name: "history"
 
@@ -29,6 +40,6 @@
 				text: "converter"
 				on_press:
 					root.manager.current = "unitconverter"
+		
+		RV:
 
-		Button:
-			text: "just started Working on it"
