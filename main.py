@@ -17,8 +17,7 @@ cursor = db.cursor()
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS calculations(
         id INTEGER PRIMARY KEY,
-        calculation TEXT,
-		answer TEXT
+        calculation TEXT
     )
 ''')
 db.commit()
@@ -93,9 +92,11 @@ class NormalCalculator(Screen):
         else:
             self.ids.calc_input.text = answer
 
+        historyData = prior + " = " + str(answer)
+
         try:
-            cursor.execute(('''INSERT INTO calculations(calculation, answer)
-					VALUES(?, ?)'''), (prior, str(answer)))
+            cursor.execute(('''INSERT INTO calculations(calculation)
+					VALUES(?)'''), (historyData,))
             db.commit()
         except Exception as e:
             print(e)
@@ -507,15 +508,31 @@ class UnitConverter(Screen):
         self.ids.dataAnswer.text = inp
 
 
+class GetHistoryData():
+    def main():
+        db = sqlite3.connect("historyData.sqlite3")
+
+        cursor = db.cursor()
+
+        cursor.execute("SELECT * FROM calculations")
+        history = cursor.fetchall()
+
+        data = []
+
+        for items in history:
+            data.append(items[1])
+
+        return data
+
+
 class RV(RecycleView):
     def __init__(self, **kwargs):
         super(RV, self).__init__(**kwargs)
-        self.data = [{'text': str(x)} for x in range(10)]
+        self.data = [{'text': str(items)} for items in GetHistoryData.main()]
 
 
 class History(Screen):
     pass
-
 
 
 class WindowsManager(ScreenManager):
