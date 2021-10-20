@@ -15,12 +15,14 @@
 				font_size: 32
 				text: "H"
 				on_press:
+					root.manager.transition.direction = 'left'
 					root.manager.current = "history"
 
 			Button:
 				font_size: 32
 				text: "calculator"
 				on_press:
+					root.manager.transition.direction = 'right'
 					root.manager.current = "normalcalculator"
 
 			Button:

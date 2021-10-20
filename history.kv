@@ -33,12 +33,14 @@
 				font_size: 32
 				text: "calculator"
 				on_press:
+					root.manager.transition.direction = 'left'
 					root.manager.current = "normalcalculator"
 
 			Button:
 				font_size: 32
 				text: "converter"
 				on_press:
+					root.manager.transition.direction = 'right'
 					root.manager.current = "unitconverter"
 		
 		RV:
