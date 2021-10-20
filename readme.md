@@ -19,7 +19,13 @@
 - - -
 
 ## How to use it
+
+> use separate python enviroment
 ```bash
+git clone https://github.com/AkuSarma/Calculator.git
+
+cd Calculator
+
 pip install kivy==2.0.0
 
 python main.py
