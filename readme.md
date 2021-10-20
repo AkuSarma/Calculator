@@ -1,6 +1,6 @@
 # <h1 style="text-align:center">Calculator</h1>
 
-<p>It's a full functioning calculator with a converster app made using python and kivy framework</p>
+<p>It's a full functioning calculator with a converter app made using python and kivy framework</p>
 
 - - -
 
